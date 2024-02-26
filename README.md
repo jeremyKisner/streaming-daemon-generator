@@ -23,7 +23,7 @@ pip install -r requirements.txt
 $env:PYTHONPATH = $pwd
 ```
 
-5. Run Service
+5. Run Music Generation Service
 ```
-python -m sdg
+python sdg/main.py -n "<name>" -a "<artist>" -l "<album>" -d "<description of audio to generate>"
 ```
