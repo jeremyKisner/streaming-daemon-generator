@@ -36,11 +36,12 @@ def main():
     parser.add_argument("-n", "--name", help="name of audio to generate")
     parser.add_argument("-a", "--artist", help="artist of audio to generate")
     parser.add_argument("-l", "--album", help="album of audio to generate")
+    parser.add_argument("-t", "--time", default=5, help="Total seconds of audio to generate")
     args = parser.parse_args()
     if args.description != None and args.description != "":
         print('Generating Music Description:', args.description)
         model = MusicGen.get_pretrained('facebook/musicgen-small')
-        model.set_generation_params(duration=2)  # generate total seconds
+        model.set_generation_params(duration=int(args.time))  # generate total seconds
         descriptions = [args.description]
         wav = model.generate(descriptions)
         for idx, one_wav in enumerate(wav):
