@@ -27,3 +27,5 @@ $env:PYTHONPATH = $pwd
 ```
 python sdg/main.py -n "<name>" -a "<artist>" -l "<album>" -d "<description of audio to generate>"
 ```
+
+Once complete, this should have uploaded a new audio record to streaming-daemon. If not, a local copy should be stored in a local `assets` directory for resending.
