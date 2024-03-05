@@ -7,8 +7,8 @@ from audiocraft.data.audio import audio_write
 
 
 def send(name, artist, album, file, description):
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    assets_dir = os.path.join(script_dir, '..', 'assets')
+    assets_dir = os.path.join(os.path.dirname(
+        os.path.abspath(__file__)), '..', 'assets')
     sent_files = []
     for file_name in os.listdir(assets_dir):
         file_path = os.path.join(assets_dir, file_name)
@@ -50,8 +50,7 @@ def main():
     if args.description != None and args.description != '':
         print('Generating Music Description:', args.description)
         model = MusicGen.get_pretrained('facebook/musicgen-small')
-        model.set_generation_params(duration=int(
-            args.time))  # generate total seconds
+        model.set_generation_params(duration=int(args.time))
         description = args.description
         wav = model.generate([description])
         for idx, one_wav in enumerate(wav):
