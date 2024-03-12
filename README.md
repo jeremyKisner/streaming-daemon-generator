@@ -24,8 +24,19 @@ $env:PYTHONPATH = $pwd
 ```
 
 5. Run Music Generation Service
+At minimum, you need to set the description, which is used by the LLM to produces an audio file.
 ```
-python sdg/main.py -n "<name>" -a "<artist>" -l "<album>" -d "<description of audio to generate>"
+python sdg/main.py -d "<description of audio to generate>"
+```
+
+However, you may supply the following additional, optional fields.
+**-n --name** - name of audio
+**-a --artist** - artist of audio
+**-l --album** - album of audio
+**-t --time** - length of time of audio. Warning, longer=more computing power needed
+**-d --description** - a prompt describing the specific audio requirements
+```
+python sdg/main.py -n "<name>" -a "<artist>" -l "<album>" -t 10 -d "<description of audio to generate>"
 ```
 
 Once complete, this should have uploaded a new audio record to streaming-daemon. If not, a local copy should be stored in a local `assets` directory for resending.
