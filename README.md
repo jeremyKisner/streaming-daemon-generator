@@ -1,5 +1,5 @@
 # streaming-daemon-generator
-This service uses the [AudioCraft (by Meta)](https://audiocraft.metademolab.com) for AI music generation. It submits results to the [streaming-daemon](https://github.com/jeremyKisner/streaming-daemon).
+This service uses [AudioCraft (by Meta)](https://audiocraft.metademolab.com) for AI music generation. It submits results to the [streaming-daemon](https://github.com/jeremyKisner/streaming-daemon).
 
 # Running Locally
 
