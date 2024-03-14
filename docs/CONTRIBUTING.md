@@ -22,11 +22,13 @@ $env:PYTHONPATH = $pwd
 ```
 
 # Running Locally
+Once complete, this should have uploaded a new audio record to streaming-daemon. If not, a local copy should be stored in a local `assets` directory for resending.
+
 ## Running as Script
-1. Run script
+1. Run
 At minimum, you need to set the description, which is used by the LLM to produces an audio file.
 ```
-python sdg/main.py -d "<description of audio to generate>"
+python -m sdg -d "<description of audio to generate>"
 ```
 
 However, you may supply the following additional, optional fields.
@@ -36,23 +38,19 @@ However, you may supply the following additional, optional fields.
 **-t --time** - length of time of audio. Warning, longer=more computing power needed
 **-d --description** - a prompt describing the specific audio requirements
 ```
-python sdg/main.py -n "<name>" -a "<artist>" -l "<album>" -t 10 -d "<description of audio to generate>"
+python -m sdg -n "<name>" -a "<artist>" -l "<album>" -t 10 -d "<description of audio to generate>"
 ```
 
-Once complete, this should have uploaded a new audio record to streaming-daemon. If not, a local copy should be stored in a local `assets` directory for resending.
-
 ## Running as Server
-1. Start the server
+1. Run
 ```
 uvicorn server:app --reload
 ``
-
 2. Check health z-page
 ```
 curl http://127.0.0.1:8000/healthz
 ```
-
-3. Send Generation Request
+3. Send Request
 ```
 curl -X POST -d {"description":"<insert audio description for LLM>"} http://127.0.0.1:8000/audio/generate
 ```
