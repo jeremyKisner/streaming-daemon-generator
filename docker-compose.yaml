@@ -1,0 +1,13 @@
+version: '3'
+services:
+  streaming-daemon-generator:
+    container_name: streaming-daemon-generator
+    image: python/3.11-bullseye
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - app_data:/app/audio
+
+volumes:
+  app_data:

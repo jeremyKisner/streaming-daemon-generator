@@ -22,7 +22,7 @@ $env:PYTHONPATH = $pwd
 ```
 
 # Running Locally
-Once complete, this should have uploaded a new audio record to streaming-daemon. If not, a local copy should be stored in a local `assets` directory for resending.
+Once complete, this should have uploaded a new audio record to streaming-daemon. If not, a local copy should be stored in a local `audio` directory for resending.
 
 ## Running as Script
 1. Run
@@ -45,12 +45,22 @@ python -m sdg -n "<name>" -a "<artist>" -l "<album>" -t 10 -d "<description of a
 1. Run
 ```
 uvicorn server:app --reload
-``
+```
 2. Check health z-page
 ```
 curl http://127.0.0.1:8000/healthz
 ```
-3. Send Request
+
+## Running Docker
+1. Build
 ```
-curl -X POST -d {"description":"<insert audio description for LLM>"} http://127.0.0.1:8000/audio/generate
+docker compose up --build -d
+```
+2. Check health z-page
+```
+curl http://127.0.0.1:8080/healthz
+```
+3. Tear down
+```
+docker compose down
 ```

@@ -4,6 +4,7 @@ import requests
 from audiocraft.models import MusicGen
 from audiocraft.data.audio import audio_write
 
+WORK_DIRECTORY = 'audio'
 
 async def execute(audio: Audio):
     print("Starting execute")
@@ -13,7 +14,7 @@ async def execute(audio: Audio):
         model.set_generation_params(duration=int(15))
         wav = model.generate([audio.description])
         for idx, one_wav in enumerate(wav):
-            file_name = f'assets/{idx}_{audio.name}_{audio.artist}_{audio.album}'
+            file_name = f'{WORK_DIRECTORY}/{idx}_{audio.name}_{audio.artist}_{audio.album}'
             audio_write(file_name, one_wav.cpu(), model.sample_rate,
                         strategy='loudness', loudness_compressor=True)
             send(audio, file_name)
@@ -21,11 +22,11 @@ async def execute(audio: Audio):
 
 
 def send(audio: Audio, file_name: str):
-    assets_dir = os.path.join(os.path.dirname(
-        os.path.abspath(__file__)), '..', 'assets')
+    _dir = os.path.join(os.path.dirname(
+        os.path.abspath(__file__)), '..', WORK_DIRECTORY)
     sent_files = []
-    for file_name in os.listdir(assets_dir):
-        file_path = os.path.join(assets_dir, file_name)
+    for file_name in os.listdir(_dir):
+        file_path = os.path.join(_dir, file_name)
         if os.path.isfile(file_path):
             try:
                 with open(file_path, 'rb') as file:
