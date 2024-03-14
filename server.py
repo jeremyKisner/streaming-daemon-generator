@@ -1,5 +1,6 @@
 from sdg.audio import Audio
 from sdg.streaming_daemon_generator import execute
+import asyncio
 from fastapi import FastAPI
 
 
@@ -11,5 +12,5 @@ def read_root():
 
 @app.post("/audio/generate")
 async def put_audio_generate(audio: Audio):
-    execute(audio)
-    return audio
+    asyncio.create_task(execute(audio))
+    return {"Audio eneration started, check back soon!"}

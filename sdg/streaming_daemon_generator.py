@@ -5,7 +5,8 @@ from audiocraft.models import MusicGen
 from audiocraft.data.audio import audio_write
 
 
-def execute(audio: Audio):
+async def execute(audio: Audio):
+    print("Starting execute")
     if audio.description != None and audio.description != '':
         print('Generating Music Description:', audio.description)
         model = MusicGen.get_pretrained('facebook/musicgen-small')
@@ -16,6 +17,7 @@ def execute(audio: Audio):
             audio_write(file_name, one_wav.cpu(), model.sample_rate,
                         strategy='loudness', loudness_compressor=True)
             send(audio, file_name)
+        print("Successfully completed execute")
 
 
 def send(audio: Audio, file_name: str):
