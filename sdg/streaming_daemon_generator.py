@@ -30,7 +30,7 @@ def send(audio: Audio, file_name: str):
         if os.path.isfile(file_path):
             try:
                 with open(file_path, 'rb') as file:
-                    url = 'http://localhost:8080/audio/insert'
+                    url = 'http://localhost:8082/audio/insert'
                     files = {'audioFile': (file_name, file)}
                     data = {
                         'name': audio.name,

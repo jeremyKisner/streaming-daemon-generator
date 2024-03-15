@@ -44,11 +44,11 @@ python -m sdg -n "<name>" -a "<artist>" -l "<album>" -t 10 -d "<description of a
 ## Running as Server
 1. Run
 ```
-uvicorn server:app --reload
+uvicorn server:app --port 8081 --reload
 ```
 2. Check health z-page
 ```
-curl http://127.0.0.1:8000/healthz
+curl http://127.0.0.1:8000
 ```
 
 ## Running Docker
@@ -58,7 +58,7 @@ docker compose up --build -d
 ```
 2. Check health z-page
 ```
-curl http://127.0.0.1:8080/healthz
+curl http://127.0.0.1:8081
 ```
 3. Tear down
 ```
