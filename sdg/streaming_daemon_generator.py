@@ -1,6 +1,7 @@
 from sdg.audio import Audio
 import os
 import requests
+import time
 from audiocraft.models import MusicGen
 from audiocraft.data.audio import audio_write
 
@@ -17,11 +18,18 @@ async def execute(audio: Audio):
             file_name = f'{WORK_DIRECTORY}/{idx}_{audio.name}_{audio.artist}_{audio.album}'
             audio_write(file_name, one_wav.cpu(), model.sample_rate,
                         strategy='loudness', loudness_compressor=True)
-            send(audio, file_name)
         print("Successfully completed execute")
 
 
-def send(audio: Audio, file_name: str):
+def background_send():
+    while True:
+        print("Start send...")
+        send()
+        print("Finished send")
+        time.sleep(15)
+
+
+def send():
     _dir = os.path.join(os.path.dirname(
         os.path.abspath(__file__)), '..', WORK_DIRECTORY)
     sent_files = []
@@ -48,3 +56,8 @@ def send(audio: Audio, file_name: str):
                         sent_files.append(file_path)
             except IOError as e:
                 print('Error opening file:', e)
+    if len(sent_files) > 0:
+         for f in sent_files:
+            time.sleep(5)
+            print("deleting file", f)
+            os.remove(f)

@@ -1,11 +1,19 @@
 from sdg.audio import Audio
-from sdg.streaming_daemon_generator import execute
+from sdg.streaming_daemon_generator import execute, background_send
+
 import asyncio
+import threading
 from fastapi import FastAPI
 import uvicorn
 
 
 app = FastAPI()
+
+# Create a thread for the background task
+background_thread = threading.Thread(target=background_send)
+background_thread.daemon = True  # Set the thread as daemon so it exits when the main thread exits
+background_thread.start()
+
 
 @app.get("/")
 def read_root():
