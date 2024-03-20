@@ -29,6 +29,7 @@ def background_send():
         time.sleep(15)
 
 
+# send will review the cache and and clean up old files.
 def send():
     _dir = os.path.join(os.path.dirname(
         os.path.abspath(__file__)), '..', WORK_DIRECTORY)
