@@ -28,7 +28,7 @@ Once complete, this should have uploaded a new audio record to streaming-daemon.
 1. Run
 At minimum, you need to set the description, which is used by the LLM to produces an audio file.
 ```
-python -m sdg -d "<description of audio to generate>"
+python .\sdg\main.py -d "<description of audio to generate>"
 ```
 
 However, you may supply the following additional, optional fields.
@@ -38,7 +38,7 @@ However, you may supply the following additional, optional fields.
 **-t --time** - length of time of audio. Warning, longer=more computing power needed
 **-d --description** - a prompt describing the specific audio requirements
 ```
-python -m sdg -n "<name>" -a "<artist>" -l "<album>" -t 10 -d "<description of audio to generate>"
+python .\sdg\main.py -n "<name>" -a "<artist>" -l "<album>" -t 10 -d "<description of audio to generate>"
 ```
 
 ## Running as Server

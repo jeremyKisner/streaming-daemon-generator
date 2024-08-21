@@ -1,6 +1,7 @@
 from sdg.audio import Audio
 from sdg.streaming_daemon_generator import execute
 import argparse
+import asyncio
 
 
 def main():
@@ -16,9 +17,11 @@ def main():
                         help='album of audio to generate')
     parser.add_argument('-t', '--time', default=15,
                         help='total seconds of audio to generate')
+    parser.add_argument('-s', '--storage', default=False,
+                        help='enable to forward save results to storage api')
     args = parser.parse_args()
-    execute(Audio(name=args.name, artist=args.artist,
-            album=args.album, description=args.description))
+    asyncio.run(execute(Audio(name=args.name, artist=args.artist,
+                              album=args.album, description=args.description), args.storage))
 
 
 if __name__ == '__main__':
