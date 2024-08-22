@@ -32,6 +32,7 @@ python .\sdg\main.py -d "<description of audio to generate>"
 ```
 
 However, you may supply the following additional, optional fields.
+
 **-n --name** - name of audio
 **-a --artist** - artist of audio
 **-l --album** - album of audio
