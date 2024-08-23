@@ -1,13 +1,12 @@
-from sdg.audio import Audio
-from sdg.streaming_daemon_generator import execute
 import argparse
 import asyncio
-
+from sdg.audio import Audio
+from sdg.streaming_daemon_generator import execute
 
 def main():
     parser = argparse.ArgumentParser(
         description='a music command-line generator')
-    parser.add_argument('-d', '--description', default='',
+    parser.add_argument('-d', '--description', default='piano',
                         help='description of audio to generate')
     parser.add_argument('-n', '--name', default='',
                         help='name of audio to generate')
@@ -17,11 +16,10 @@ def main():
                         help='album of audio to generate')
     parser.add_argument('-t', '--time', default=15,
                         help='total seconds of audio to generate')
-    parser.add_argument('-s', '--storage', default=False,
+    parser.add_argument('-s', '--storage', default=True,
                         help='enable to forward save results to storage api')
     args = parser.parse_args()
-    asyncio.run(execute(Audio(name=args.name, artist=args.artist,
-                              album=args.album, description=args.description), args.storage))
+    asyncio.run(execute(args))
 
 
 if __name__ == '__main__':
