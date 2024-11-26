@@ -7,17 +7,21 @@ from sdg.config import WORK_DIRECTORY, SHOULD_SEND
 
 
 async def execute(args):
-    global SHOULD_SEND
-    SHOULD_SEND = args.storage
-
     print("Starting execute")
+    parse_args(args)
+
     if args.description != None and args.description != '':
-        print('Generating Music Description:', args.description)
         model = MusicGen.get_pretrained('facebook/musicgen-small')
         model.set_generation_params(duration=int(15))
         wav = model.generate([args.description])
         generate_audio(model, wav)
         print("Successfully completed execute.")
+
+
+def parse_args(args):
+    print("parsing args")
+    global SHOULD_SEND
+    SHOULD_SEND = args.storage
 
 
 def generate_audio(model: MusicGen, wav: Tuple[Tensor, Tensor]):

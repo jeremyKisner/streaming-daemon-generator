@@ -13,25 +13,21 @@ class Sender:
 
     def send(self):
         for filename in os.listdir(UNSENT):
-            if filename.endswith('.wav'):
-                a = Audio(description=filename)
-                if self._do(a, filename, os.path.join(UNSENT, filename)):
-                    self._move(filename)
+            if self._do(filename, os.path.join(UNSENT, filename)):
+                self._move(filename)
 
 
-    def _do(self, audio: Audio, file_name: str, file_path: str) -> bool:
-        print("sending payloads")
+    def _do(self, file_name: str, file_path: str) -> bool:
+        if not file_name.endswith('.wav'):
+            print("file type not supported")
+            return
         try:
+            print("sending payloads")
+            audio = Audio(description=file_name)
             with open(file_path, 'rb') as file:
                 url = 'http://localhost:8082/audio/insert'
                 files = {'audioFile': (file_name, file)}
-                data = {
-                    'name': audio.name,
-                    'artist': audio.artist,
-                    'album': audio.album,
-                    'description': audio.description,
-                }
-                response = requests.post(url, files=files, data=data)
+                response = requests.post(url, files=files, data=audio.__dict__)
                 if response.status_code != 200:
                     print('Failure:', response.text,
                           audio.name, audio.artist, audio.album)

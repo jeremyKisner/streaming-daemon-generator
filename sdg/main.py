@@ -1,7 +1,7 @@
 import argparse
 import asyncio
-from sdg.audio import Audio
 from sdg.streaming_daemon_generator import execute
+
 
 def main():
     parser = argparse.ArgumentParser(
