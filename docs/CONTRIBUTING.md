@@ -22,16 +22,15 @@ $env:PYTHONPATH = $pwd
 ```
 
 # Running Locally
-Once complete, this should have uploaded a new audio record to streaming-daemon. If not, a local copy should be stored in a local `audio` directory for resending.
 
-## Running as Script
+## Running Script
 1. Run
 At minimum, you need to set the description, which is used by the LLM to produces an audio file.
 ``` bash
 python .\sdg\main.py -d "<description of audio to generate>"
 ```
 
-However, you may supply the following additional, optional fields.
+However, you may supply the following additional, optional parameters.
 
 - **-n --name** - name of audio
 - **-a --artist** - artist of audio
@@ -44,7 +43,7 @@ For example, run:
 python .\sdg\main.py -n "<name>" -a "<artist>" -l "<album>" -t 10 -d "<description of audio to generate>"
 ```
 
-## Running as Server
+## Running Server
 1. Run
 ``` bash
 uvicorn server:app --port 8081 --reload
